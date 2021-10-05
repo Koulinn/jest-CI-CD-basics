@@ -26,7 +26,7 @@ describe("Testing the server", () => {
             .then(() => {
                 console.log("Connected to Atlas")
                 done()
-            })
+            }).catch(err=>console.log(err))
     })
 
     afterAll(done => {
