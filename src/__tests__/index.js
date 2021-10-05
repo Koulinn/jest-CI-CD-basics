@@ -22,7 +22,7 @@ describe("Testing the server", () => {
     // console.log(process.env.MONGO_PROD_URL, 'PROD URL')
 
     beforeAll(done => {
-        mongoose.connect(process.env.MONGO_PROD_URL)
+        mongoose.connect(process.env.MONGO_DEV_URL)
             .then(() => {
                 console.log("Connected to Atlas")
                 done()
@@ -89,7 +89,7 @@ describe("Testing the server", () => {
 
     })
 
-    it("should test that a GET /products endpoint is returning a valid product", async () => {
+    it("should test that GET /products endpoint is returning a valid product", async () => {
         const response = await request.post('/products').send(validProduct)
 
         expect(response.status).toBe(201)
@@ -97,7 +97,25 @@ describe("Testing the server", () => {
 
         const idResponse = await request.get('/products/' + response.body._id)
         expect(idResponse.body.name).toEqual(validProduct.name)
+
+        const nonExistingId = '615c536157e11585247c4425'
+        const getByIdResponse = await request.get('/products/' + nonExistingId)
+        expect(getByIdResponse.status).toBe(404)
     })
+
+    it("should test that DELETE endpoint is returning the right status code", async () => {
+       const dummyProd = {
+           _id:'615c66eed6d574ead8a13958',
+           name: "testProd",
+           price: 50
+       }
+       const response = await request.post('/products').send(dummyProd)
+
+        const getByIdResponse = await request.delete('/products/' + dummyProd._id)
+        expect(getByIdResponse.status).toBe(204)
+    })
+
+    
 
 
 
