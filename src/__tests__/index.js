@@ -65,7 +65,7 @@ describe("Testing the server", () => {
     })
 
     const validProduct = {
-        // name: 'iPhone',
+        name: 'iPhone',
         price: 900
     }
 
