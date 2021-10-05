@@ -22,7 +22,7 @@ describe("Testing the server", () => {
     // console.log(process.env.MONGO_PROD_URL, 'PROD URL')
 
     beforeAll(done => {
-        mongoose.connect(process.env.MONGO_DEV_URL)
+        mongoose.connect(process.env.MONGO_PROD_URL)
             .then(() => {
                 console.log("Connected to Atlas")
                 done()
