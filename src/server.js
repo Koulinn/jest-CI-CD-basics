@@ -13,4 +13,6 @@ app.get("/test", (req, res) => {
 
 app.use("/products", productsRouter)
 
+console.log('random stuff')
+
 export default app
