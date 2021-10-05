@@ -17,7 +17,28 @@ productsRouter.post('/', async (req, res) => {
 productsRouter.get('/:id', async (req, res) => {
     try {
         const product = await ProductModel.findById(req.params.id)
-        res.status(200).send(product)
+        if(product){
+
+            res.status(200).send(product)
+        } else {
+            res.status(404).send({success: false, msg: `Prod with Id ${req.params.id} not found`})
+        }
+
+    } catch (error) {
+        res.status(404).send(error)
+    }
+})
+
+productsRouter.delete('/:id', async (req, res) => {
+    try {
+        const product = await ProductModel.findById(req.params.id)
+        if(product){
+            product.remove()
+            res.status(204).send()
+        } else {
+            res.status(404).send({success: false, msg: `Prod with Id ${req.params.id} not found`})
+        }
+
     } catch (error) {
         res.status(404).send(error)
     }
