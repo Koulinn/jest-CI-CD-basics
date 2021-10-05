@@ -19,6 +19,7 @@ describe("Testing the testing environment", () => {
 describe("Testing the server", () => {
     // make sure there is an endpoint that is a /test endpoint which will return 200 and a JSON object like the following:
     // { message: "Test success" }
+    // console.log(process.env.MONGO_PROD_URL, 'PROD URL')
 
     beforeAll(done => {
         mongoose.connect(process.env.MONGO_PROD_URL)
@@ -30,7 +31,7 @@ describe("Testing the server", () => {
 
     afterAll(done => {
         mongoose.connection.dropDatabase().then(() => {
-            console.log("Test DB dropped")
+            console.log("DB dropped")
 
             mongoose.connection.close().then(() => {
                 done()
