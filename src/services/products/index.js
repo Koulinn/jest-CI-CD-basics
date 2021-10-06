@@ -29,6 +29,7 @@ productsRouter.get('/:id', async (req, res) => {
     }
 })
 
+
 productsRouter.delete('/:id', async (req, res) => {
     try {
         const product = await ProductModel.findById(req.params.id)
